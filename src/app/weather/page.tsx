@@ -1,6 +1,6 @@
 "use client"
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import axios from 'axios';
 import Weather from '@/components/Weather';
 import Link from 'next/link';
@@ -26,8 +26,9 @@ export default function WeatherPage() {
   return (
     <div className="flex flex-col justify-around items-center h-screen gap-2 p-4">
       <h1 className="text-3xl font-bold text-center">מזג אוויר 2024 בעיר {city}.</h1>
-      
+      <Suspense fallback={<div>Loading...</div>}>
         <Weather weatherData={weatherData} />
+      </Suspense>
       <div className='flex flex-row gap-3'>
     <Link href="/users"><button className='w-auto p-2 h-12 border border-black rounded-md' >לחזור לרשימת המשתמשים</button></Link>
     <Link href="/"><button className='w-auto p-2 h-12 border border-black rounded-md' >לחזור לדף הראשי</button></Link>
